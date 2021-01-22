@@ -10,7 +10,7 @@ public class InputSystemShipInput : ShipInput
 {
     private IObservable<Vector2> _sailDirection;
     private IObservable<Vector2> _shipDirection;
-    private IObservable<bool> _sailIntensity;
+    private IObservable<float> _sailIntensity;
 
     public override IObservable<Vector2> sailDirection
     {
@@ -20,7 +20,7 @@ public class InputSystemShipInput : ShipInput
     {
         get { return _shipDirection; }
     }
-    public override IObservable<bool> sailIntensity
+    public override IObservable<float> sailIntensity
     {
         get { return _sailIntensity; }
     }
@@ -61,7 +61,7 @@ public class InputSystemShipInput : ShipInput
         //Sail Intensity
         _sailIntensity = this.UpdateAsObservable().Select(_ =>
         {
-            return controls.OpenSea.SailIntensity.ReadValue<bool>();
+            return controls.OpenSea.SailIntensity.ReadValue<float>();
         });
 
     }
