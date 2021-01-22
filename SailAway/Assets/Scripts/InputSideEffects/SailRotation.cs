@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
+using System;
+using System.Collections.Generic;
 
 public class SailRotation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] 
+    private GameObject shipObject;
+    private IShipSignals _shipSignals;
+    private GameObject _sails;
+
+    private void Awake()
     {
-        
+        _shipSignals = shipObject.GetComponent<ShipController>();
+        _sails = gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void start()
     {
-        
+        _shipSignals.sailAngle.Subscribe(a =>
+        {
+            _sails.transform.Rotate(0f, a, 0f);
+        }).AddTo(this);
     }
 }
