@@ -2,28 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UniRx;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
-    public static Vector2 windDir = Vector3.forward;
-    public static float windStrength = 100.0f;
+    public static Vector2 windDir = Vector2.up;
+    public static float windStrength = 10.0f;
 
     Vector2 shipForward = Vector2.up;
     Vector2 sailForward = Vector2.up;//TODO: convert fromlocal to global
-    Vector2 rudderForward = Vector2.up;//TODO: might need inverting
+    Vector2 rudderForward = -Vector2.up;//TODO: might need inverting
 
     //[Range(0.0f, 1.0f)] float keelStrength = 0.9f;
-    //[Range(0.0f, 1.0f)] float sailStrength = 1.0f;
+    [Range(0.0f, 1.0f)] float sailStrength = 1.0f;
     [SerializeField] float turnSpeed = 10.0f;
+    [SerializeField] float speed = 10.0f;
 
     Rigidbody rigid;
+
+
+    public ShipInput input; 
+
 
     void Start()
     {
         //TODO: listen to input streams
 
         rigid = GetComponent<Rigidbody>();
+
+#region input
+        //listen to input
+        input.sailDirection
+            .Where(v => v != Vector2.zero)
+            .Subscribe
+            (
+                input =>
+                {
+                    sailForward = input.normalized;
+                }
+            )
+            .AddTo(this);
+
+        input.shipDirection
+            .Where(v => v != Vector2.zero)
+            .Subscribe
+            (
+                input =>
+                {
+                    rudderForward = input.normalized;
+                }
+            )
+            .AddTo(this);
+        
+        input.sailIntensity
+            .Where(v => v != null)
+            .Subscribe
+            (
+                input =>
+                {
+                    sailStrength = input ? 0.0f : 1.0f;
+                }
+            )
+            .AddTo(this);
+        
+#endregion
     }
 
     void FixedUpdate()
@@ -58,14 +102,15 @@ public class ShipController : MonoBehaviour
         return new Vector3(v2.x, 0, v2.y);
     }
 
-    float relatieWindStrength()
-   {
-        return windStrength * Vector2.Angle(windDir, sailForward) / 180.0f;
-   }
+    float relativeWindStrength()
+    {
+        return windStrength * Vector2.Dot(windDir.normalized, sailForward.normalized);/*Vector2.Angle(windDir, sailForward) / 180.0f*/
+    }
 
    float moveStrength()//TODO: use keel strength
    {
-        return relatieWindStrength() * (1 - (Vector2.Angle(shipForward, sailForward) / 180.0f));
+        float windShipMul = (1 - Vector2.Dot(shipForward.normalized, sailForward.normalized));//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
+        return sailStrength * speed * relativeWindStrength() * windShipMul;
    }
 
 
@@ -74,22 +119,19 @@ public class ShipController : MonoBehaviour
     void OnDrawGizmos()
     {
         //Wind direction
-        Gizmos.color = Color.white;
-        Gizmos.DrawLine(transform.position, transform.position + vector3FromVector2(windDir) * windStrength / 10.0f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + vector3FromVector2(windDir) * windStrength);
 
         //Forward direction
         Gizmos.color = Color.blue;
-        if(rigid != null)
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * rigid.velocity.magnitude);
-        else
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2.0f);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3.0f);
 
         //Sail direction
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + Vector3.up*2, transform.position + Vector3.up*2 + vector3FromVector2(sailForward) * moveStrength() / 10.0f);
+        Gizmos.DrawLine(transform.position + Vector3.up*2, transform.position + Vector3.up*2 + vector3FromVector2(sailForward) * 3.0f);
 
         //Rudder direction
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + vector3FromVector2(rudderForward) * (1.0f/10.0f - 2.0f));
+        Gizmos.DrawLine(transform.position - transform.forward * 2.0f, transform.position + vector3FromVector2(rudderForward) - transform.forward*2.0f);
     }
 }
