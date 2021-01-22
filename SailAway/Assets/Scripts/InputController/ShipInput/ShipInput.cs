@@ -14,8 +14,14 @@ public abstract class ShipInput : MonoBehaviour
     /// change direction of ship
     /// Interaction type: continuous axes.
     /// </summary>
-    public abstract IObservable<Unit> shipDirection { get;  }
-    
+    public abstract IObservable<Vector2> shipDirection { get;  }
+
+    /// <summary>
+    /// change sail strength
+    /// Interaction type: trigger.
+    /// </summary>
+    public abstract IObservable<float> sailIntensity { get; }
+
 }
 
 
