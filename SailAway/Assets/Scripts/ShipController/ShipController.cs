@@ -132,7 +132,9 @@ public class ShipController : MonoBehaviour
 
     float rudderDrag()
     {
-        return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed,0.0f,1.0f);
+        //return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed,0.0f,1.0f);
+        //return Mathf.Cos(Mathf.Deg2Rad * (Vector2.SignedAngle(shipForward, worldRudderForward))) * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
+        return Vector2.SignedAngle(-Vector2.up, rudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
     }
 
     public static Vector2 vector2FromVector3(Vector3 v3)
