@@ -27,10 +27,18 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""BoatDirection"",
+                    ""name"": ""ShipDirection"",
                     ""type"": ""Value"",
                     ""id"": ""3a8ece7b-155e-4198-bc52-b82ef99ba2f8"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SailIntensity"",
+                    ""type"": ""Value"",
+                    ""id"": ""4cf2fc76-e448-40dd-bc79-5392c6d6dc57"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -109,7 +117,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -120,7 +128,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -131,7 +139,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -142,7 +150,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -153,7 +161,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -164,9 +172,31 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""BoatDirection"",
+                    ""action"": ""ShipDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08e2858e-98c9-4b45-b89f-616da63acb7d"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SailIntensity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3df7f8d1-b0c1-4451-b45d-880ad2b814cb"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SailIntensity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,7 +229,8 @@ public class @MainInput : IInputActionCollection, IDisposable
         // OpenSea
         m_OpenSea = asset.FindActionMap("OpenSea", throwIfNotFound: true);
         m_OpenSea_SailDirection = m_OpenSea.FindAction("SailDirection", throwIfNotFound: true);
-        m_OpenSea_BoatDirection = m_OpenSea.FindAction("BoatDirection", throwIfNotFound: true);
+        m_OpenSea_ShipDirection = m_OpenSea.FindAction("ShipDirection", throwIfNotFound: true);
+        m_OpenSea_SailIntensity = m_OpenSea.FindAction("SailIntensity", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,13 +281,15 @@ public class @MainInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_OpenSea;
     private IOpenSeaActions m_OpenSeaActionsCallbackInterface;
     private readonly InputAction m_OpenSea_SailDirection;
-    private readonly InputAction m_OpenSea_BoatDirection;
+    private readonly InputAction m_OpenSea_ShipDirection;
+    private readonly InputAction m_OpenSea_SailIntensity;
     public struct OpenSeaActions
     {
         private @MainInput m_Wrapper;
         public OpenSeaActions(@MainInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @SailDirection => m_Wrapper.m_OpenSea_SailDirection;
-        public InputAction @BoatDirection => m_Wrapper.m_OpenSea_BoatDirection;
+        public InputAction @ShipDirection => m_Wrapper.m_OpenSea_ShipDirection;
+        public InputAction @SailIntensity => m_Wrapper.m_OpenSea_SailIntensity;
         public InputActionMap Get() { return m_Wrapper.m_OpenSea; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,9 +302,12 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @SailDirection.started -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailDirection;
                 @SailDirection.performed -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailDirection;
                 @SailDirection.canceled -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailDirection;
-                @BoatDirection.started -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnBoatDirection;
-                @BoatDirection.performed -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnBoatDirection;
-                @BoatDirection.canceled -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnBoatDirection;
+                @ShipDirection.started -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnShipDirection;
+                @ShipDirection.performed -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnShipDirection;
+                @ShipDirection.canceled -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnShipDirection;
+                @SailIntensity.started -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailIntensity;
+                @SailIntensity.performed -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailIntensity;
+                @SailIntensity.canceled -= m_Wrapper.m_OpenSeaActionsCallbackInterface.OnSailIntensity;
             }
             m_Wrapper.m_OpenSeaActionsCallbackInterface = instance;
             if (instance != null)
@@ -279,9 +315,12 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @SailDirection.started += instance.OnSailDirection;
                 @SailDirection.performed += instance.OnSailDirection;
                 @SailDirection.canceled += instance.OnSailDirection;
-                @BoatDirection.started += instance.OnBoatDirection;
-                @BoatDirection.performed += instance.OnBoatDirection;
-                @BoatDirection.canceled += instance.OnBoatDirection;
+                @ShipDirection.started += instance.OnShipDirection;
+                @ShipDirection.performed += instance.OnShipDirection;
+                @ShipDirection.canceled += instance.OnShipDirection;
+                @SailIntensity.started += instance.OnSailIntensity;
+                @SailIntensity.performed += instance.OnSailIntensity;
+                @SailIntensity.canceled += instance.OnSailIntensity;
             }
         }
     }
@@ -307,6 +346,7 @@ public class @MainInput : IInputActionCollection, IDisposable
     public interface IOpenSeaActions
     {
         void OnSailDirection(InputAction.CallbackContext context);
-        void OnBoatDirection(InputAction.CallbackContext context);
+        void OnShipDirection(InputAction.CallbackContext context);
+        void OnSailIntensity(InputAction.CallbackContext context);
     }
 }
