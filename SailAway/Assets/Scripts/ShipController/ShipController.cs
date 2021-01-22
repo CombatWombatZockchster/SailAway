@@ -62,7 +62,7 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    sailStrength = input ? 0.0f : 1.0f;
+                    sailStrength = input;
                 }
             )
             .AddTo(this);
