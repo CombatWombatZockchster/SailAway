@@ -11,20 +11,20 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UniRx;
-
+using UniRx.Triggers;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ShipController : MonoBehaviour
+public class ShipController : MonoBehaviour, IShipSignals
 {
     public static Vector2 windDir = Vector2.up;
     public static float windStrength = 5.0f;
 
     Vector2 shipForward = Vector2.up;
-    Vector2 sailForward = Vector2.up;//TODO: convert fromlocal to global
-    Vector2 rudderForward = -Vector2.up;//TODO: might need inverting
+    Vector2 sailForward = Vector2.up;
+    Vector2 rudderForward = -Vector2.up;
 
-    Vector2 worldSailForward = Vector2.up;//TODO: convert fromlocal to global
-    Vector2 worldRudderForward = -Vector2.up;//TODO: might need inverting
+    Vector2 worldSailForward = Vector2.up;
+    Vector2 worldRudderForward = -Vector2.up;
 
     [Range(0.0f, 1.0f)] float sailStrength = 1.0f;
 
@@ -132,8 +132,6 @@ public class ShipController : MonoBehaviour
 
     float rudderDrag()
     {
-        //return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed,0.0f,1.0f);
-        //return Mathf.Cos(Mathf.Deg2Rad * (Vector2.SignedAngle(shipForward, worldRudderForward))) * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
         return Vector2.SignedAngle(-Vector2.up, rudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
     }
 
@@ -148,10 +146,10 @@ public class ShipController : MonoBehaviour
 
     float relativeWindStrength()
     {
-        return windStrength * Vector2.Dot(windDir.normalized, worldSailForward.normalized);/*Vector2.Angle(windDir, sailForward) / 180.0f*/
+        return windStrength * Vector2.Dot(windDir.normalized, worldSailForward.normalized);
     }
 
-   float moveStrength()//TODO: use keel strength
+   float moveStrength()
    {
         //float windShipMul = Vector2.Dot(shipForward.normalized, worldSailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
         return sailStrength * speed * relativeWindStrength(); //* windShipMul;
