@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputController/PlayerInput/ShipInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputController/PlayerInput/MainInput.inputactions'
 
 using System;
 using System.Collections;
@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @ShipInput : IInputActionCollection, IDisposable
+public class @MainInput : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @ShipInput()
+    public @MainInput()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""ShipInput"",
+    ""name"": ""MainInput"",
     ""maps"": [
         {
             ""name"": ""OpenSea"",
@@ -253,8 +253,8 @@ public class @ShipInput : IInputActionCollection, IDisposable
     private readonly InputAction m_OpenSea_BoatDirection;
     public struct OpenSeaActions
     {
-        private @ShipInput m_Wrapper;
-        public OpenSeaActions(@ShipInput wrapper) { m_Wrapper = wrapper; }
+        private @MainInput m_Wrapper;
+        public OpenSeaActions(@MainInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @SailDirection => m_Wrapper.m_OpenSea_SailDirection;
         public InputAction @BoatDirection => m_Wrapper.m_OpenSea_BoatDirection;
         public InputActionMap Get() { return m_Wrapper.m_OpenSea; }
