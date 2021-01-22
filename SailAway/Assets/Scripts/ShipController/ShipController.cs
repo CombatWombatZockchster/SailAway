@@ -42,43 +42,22 @@ public class ShipController : MonoBehaviour, IShipSignals
 
     public ShipInput input;
 
-
     #region signals
-    /*
-    float sail()
-    {
-        return Vector2.SignedAngle(Vector2.up, sailForward);
-    }
-    float rudder()
-    {
-        return Vector2.SignedAngle(Vector2.up, sailForward);
-    }
-    float tilt()
-    {
-        return 1.0f - Vector2.Dot(shipForward, windDir);
-    }
-    */
-    private Subject<float> _sail;
-    private Subject<float> _rudder;
-    private Subject<float> _tilt;
-    private Subject<float> _speed;
-    IObservable<float> IShipSignals.sailAngle => _sail;
+    public ReactiveProperty<float> sailAngle = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> rudderAngle = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> shiplTiltRelative = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> shipSpeed = new ReactiveProperty<float>(0.0f);
 
-    IObservable<float> IShipSignals.rudderlAngle => _rudder;
-
-    IObservable<float> IShipSignals.shiplTiltRelative => _tilt;
-
-    IObservable<float> IShipSignals.speed => _speed;
     #endregion
-
+    /*
     void Awake()
     {
-        _sail = new Subject<float>().AddTo(this);
-        _rudder = new Subject<float>().AddTo(this);
-        _tilt = new Subject<float>().AddTo(this);
-        _speed = new Subject<float>().AddTo(this);
+       sailAngle = new ReactiveProperty<float>(0.0f);
+       rudderAngle = new ReactiveProperty<float>(0.0f);
+       shiplTiltRelative = new ReactiveProperty<float>(0.0f);
+       IShipSignals.speed = new ReactiveProperty<float>(0.0f);
     }
-
+    */
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -130,7 +109,6 @@ public class ShipController : MonoBehaviour, IShipSignals
 
                             rudderForward = v;
                         }
-                        _sail.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
                     }
                 }
             )
@@ -161,12 +139,11 @@ public class ShipController : MonoBehaviour, IShipSignals
 
         rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
 
-        #region signals
         
-        _rudder.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
-        _tilt.OnNext(1.0f - Vector2.Dot(shipForward, windDir));
-        _speed.OnNext(rigid.velocity.magnitude);
-        #endregion
+        sailAngle.value =  Vector2.SignedAngle(Vector2.up, sailForward);
+        rudderAngle.value =  Vector2.SignedAngle(Vector2.up, rudderForward);
+        shiplTiltRelative.value =  1.0f - Vector2.Dot(shipForward, windDir);
+        shipSpeed.value = rigid.velocity.magnitude;
     }
 
     Quaternion rudderRotation()

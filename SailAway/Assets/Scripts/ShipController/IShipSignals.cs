@@ -7,8 +7,8 @@ using System;
 
 public interface IShipSignals
 {
-    IObservable<float> sailAngle { get; }
-    IObservable<float> rudderlAngle { get; }
-    IObservable<float> shiplTiltRelative { get; }//[-1,1]
-    IObservable<float> speed{ get; }
+    ReactiveProperty<float> sailAngle { get; }
+    ReactiveProperty<float> rudderAngle { get; }
+    ReactiveProperty<float> shiplTiltRelative { get; }//[-1,1]
+    ReactiveProperty<float> shipSpeed{ get; }
 }
