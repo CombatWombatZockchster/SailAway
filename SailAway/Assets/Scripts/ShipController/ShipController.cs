@@ -32,6 +32,9 @@ public class ShipController : MonoBehaviour
     [SerializeField] float turnSpeed = 10.0f;
     [SerializeField] float speed = 10.0f;
 
+    [SerializeField] float maxSailAngle = 90.0f;
+    [SerializeField] float maxRudderAngle = 90.0f;
+
     Rigidbody rigid;
 
 
@@ -50,7 +53,19 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    sailForward = input /*vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized*/;
+                    float angle = Vector2.SignedAngle(input, Vector2.up);
+                    if (Mathf.Abs(angle) <= maxSailAngle)
+                        sailForward = input;
+                    else
+                    {
+                        Vector2 v = new Vector2
+                        (
+                            (angle > 0 ? 1.0f : -1.0f) * Mathf.Sin(maxSailAngle), 
+                            Mathf.Cos(maxSailAngle)
+                        );
+
+                        sailForward = v;
+                    }
                 }
             )
             .AddTo(this);
@@ -61,15 +76,28 @@ public class ShipController : MonoBehaviour
                 input =>
                 {
                     if (input == Vector2.zero)
-                        rudderForward = Vector2.up;
+                        rudderForward = -Vector2.up;
                     else
-                        rudderForward = -input /*vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized*/;
+                    {
+                        float angle = Vector2.SignedAngle(input, -Vector2.up);
+                        if (Mathf.Abs(angle) <= maxRudderAngle)
+                            rudderForward = input;
+                        else
+                        {
+                            Vector2 v = new Vector2
+                            (
+                                (angle > 0 ? -1.0f : 1.0f) * Mathf.Sin(maxRudderAngle),
+                                Mathf.Cos(maxRudderAngle)
+                            );
+
+                            rudderForward = v;
+                        }
+                    }
                 }
             )
             .AddTo(this);
         
         input.sailIntensity
-            .Where(v => v != null)
             .Subscribe
             (
                 input =>
@@ -106,7 +134,7 @@ public class ShipController : MonoBehaviour
 
     float rudderDrag()
     {
-        return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed/2.0f,0.0f,1.0f);
+        return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed,0.0f,1.0f);
     }
 
     public static Vector2 vector2FromVector3(Vector3 v3)
@@ -125,8 +153,8 @@ public class ShipController : MonoBehaviour
 
    float moveStrength()//TODO: use keel strength
    {
-        float windShipMul = Vector2.Dot(shipForward.normalized, worldSailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
-        return sailStrength * speed * relativeWindStrength() * windShipMul;
+        //float windShipMul = Vector2.Dot(shipForward.normalized, worldSailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
+        return sailStrength * speed * relativeWindStrength(); //* windShipMul;
    }
 
 

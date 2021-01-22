@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1dd08092710124db19045bc438132d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keelStrength: 0.9
   turnSpeed: 0.5
   speed: 3
   input: {fileID: 7537213300882949060}
@@ -421,7 +422,7 @@ Rigidbody:
   m_GameObject: {fileID: 7537213300882949057}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0.8
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
