@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 //Add this script to your ship
-public class NewBehaviourScript : MonoBehaviour
+public class ShipTilting : MonoBehaviour
 {
     private IShipSignals _shipSignals;
     public float maxAngle;
