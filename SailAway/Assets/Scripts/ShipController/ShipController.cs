@@ -130,6 +130,7 @@ public class ShipController : MonoBehaviour, IShipSignals
 
                             rudderForward = v;
                         }
+                        _sail.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
                     }
                 }
             )
@@ -161,7 +162,7 @@ public class ShipController : MonoBehaviour, IShipSignals
         rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
 
         #region signals
-        _sail.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
+        
         _rudder.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
         _tilt.OnNext(1.0f - Vector2.Dot(shipForward, windDir));
         _speed.OnNext(rigid.velocity.magnitude);
