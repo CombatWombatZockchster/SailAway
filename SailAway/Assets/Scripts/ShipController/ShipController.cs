@@ -53,15 +53,15 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    float angle = Vector2.SignedAngle(input, Vector2.up);
+                    float angle = Vector2.SignedAngle(Vector2.up, input);
                     if (Mathf.Abs(angle) <= maxSailAngle)
                         sailForward = input;
                     else
                     {
                         Vector2 v = new Vector2
                         (
-                            (angle > 0 ? 1.0f : -1.0f) * Mathf.Sin(maxSailAngle), 
-                            Mathf.Cos(maxSailAngle)
+                            (angle > 0 ? -1.0f : 1.0f) * Mathf.Sin(Mathf.Deg2Rad*maxSailAngle), 
+                            -Mathf.Cos(Mathf.Deg2Rad*maxSailAngle)
                         );
 
                         sailForward = v;
@@ -79,15 +79,15 @@ public class ShipController : MonoBehaviour
                         rudderForward = -Vector2.up;
                     else
                     {
-                        float angle = Vector2.SignedAngle(input, -Vector2.up);
+                        float angle = Vector2.SignedAngle(-Vector2.up, input);
                         if (Mathf.Abs(angle) <= maxRudderAngle)
                             rudderForward = input;
                         else
                         {
                             Vector2 v = new Vector2
                             (
-                                (angle > 0 ? -1.0f : 1.0f) * Mathf.Sin(maxRudderAngle),
-                                Mathf.Cos(maxRudderAngle)
+                                (angle > 0 ? 1.0f : -1.0f) * Mathf.Sin(Mathf.Deg2Rad*maxRudderAngle),
+                                -Mathf.Cos(Mathf.Deg2Rad*maxRudderAngle)
                             );
 
                             rudderForward = v;
@@ -126,10 +126,8 @@ public class ShipController : MonoBehaviour
     Quaternion rudderRotation()
     {
         float rot = transform.rotation.eulerAngles.y;
-
         rot += turnSpeed * rudderDrag();
-
-        return Quaternion.Euler(0, rot, 0); 
+        return Quaternion.Euler(0, rot, 0);        
     }
 
     float rudderDrag()
