@@ -7,23 +7,24 @@ using System.Collections.Generic;
 //Add this script to the sails of your boat
 public class SailRotation : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject shipObject;
+    // [SerializeField] 
+    // private GameObject shipObject;
     private IShipSignals _shipSignals;
     private GameObject _sails;
 
     private void Awake()
     {
-        _shipSignals = shipObject.GetComponent<ShipController>();
+        _shipSignals = transform.parent.GetComponent<ShipController>();
         _sails = gameObject;
-        _shipSignals.sailAngle.Subscribe(a =>
-        {
-            _sails.transform.localRotation = Quaternion.Euler(0f, -a, 0f);
-        }).AddTo(this);
+        
     }
 
     private void start()
     {
-        
+        _shipSignals.sailAngle.AsObservable().Subscribe(a =>
+        {
+            Debug.Log("Fire");
+            _sails.transform.localRotation = Quaternion.Euler(0f, -a, 0f);
+        }).AddTo(this);
     }
 }
