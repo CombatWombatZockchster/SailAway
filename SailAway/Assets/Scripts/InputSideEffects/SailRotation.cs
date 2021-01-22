@@ -4,6 +4,7 @@ using UniRx.Triggers;
 using System;
 using System.Collections.Generic;
 
+//Add this script to the sails of your boat
 public class SailRotation : MonoBehaviour
 {
     [SerializeField] 

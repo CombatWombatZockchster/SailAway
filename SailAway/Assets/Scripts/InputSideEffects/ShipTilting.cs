@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
+using System;
+using System.Collections.Generic;
 
+//Add this script to your ship
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private IShipSignals _shipSignals;
+    public float maxAngle;
+
+    private void Awake()
     {
-        
+        _shipSignals = gameObject.GetComponent<ShipController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void start()
     {
-        
+        _shipSignals.shiplTiltRelative.Subscribe(a =>
+        {
+            gameObject.transform.Rotate(0f, 0f, a * maxAngle);
+        }).AddTo(this);
     }
 }
