@@ -42,23 +42,25 @@ public class ShipController : MonoBehaviour, IShipSignals
     public ShipInput input;
 
     #region signals
-    private ReactiveProperty<float> _sailAngle;// = new ReactiveProperty<float>(0.0f);
-    private ReactiveProperty<float> _rudderAngle;// = new ReactiveProperty<float>(0.0f);
-    private ReactiveProperty<float> _shiplTiltRelative;// = new ReactiveProperty<float>(0.0f);
-    private ReactiveProperty<float> _shipSpeed;// = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _sailAngle = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _rudderAngle = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _shiplTiltRelative = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _shipSpeed = new ReactiveProperty<float>(0.0f);
 
-    public ReactiveProperty<float> sailAngle => _sailAngle;// = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> rudderAngle => _rudderAngle;// = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> shiplTiltRelative => _shiplTiltRelative;// = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> shipSpeed => _shipSpeed;// = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> sailAngle => _sailAngle;
+    public ReactiveProperty<float> rudderAngle => _rudderAngle;
+    public ReactiveProperty<float> shiplTiltRelative => _shiplTiltRelative;
+    public ReactiveProperty<float> shipSpeed => _shipSpeed;
     #endregion
     
     void Awake()
     {
+        /*
        _sailAngle = new ReactiveProperty<float>(0.0f);
        _rudderAngle = new ReactiveProperty<float>(0.0f);
        _shiplTiltRelative = new ReactiveProperty<float>(0.0f);
        _shipSpeed = new ReactiveProperty<float>(0.0f);
+       */
     }
     
     void Start()
@@ -143,9 +145,9 @@ public class ShipController : MonoBehaviour, IShipSignals
         rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
 
         
-        _sailAngle.Value =  Vector2.SignedAngle(Vector2.up, sailForward);
-        _rudderAngle.Value =  Vector2.SignedAngle(Vector2.up, rudderForward);
-        _shiplTiltRelative.Value =  1.0f - Vector2.Dot(shipForward, windDir);
+        _sailAngle.Value = Vector2.SignedAngle(Vector2.up, sailForward);
+        _rudderAngle.Value = Vector2.SignedAngle(-Vector2.up, rudderForward);
+        _shiplTiltRelative.Value = 1.0f - Vector2.Dot(shipForward, windDir);
         _shipSpeed.Value = rigid.velocity.magnitude;
     }
 
