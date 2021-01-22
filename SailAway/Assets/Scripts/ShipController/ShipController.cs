@@ -1,6 +1,10 @@
 /*
  * Written by Jonas
  * Applies semi realistic physics to the boat based on the input
+ * 
+ * TODO:
+ * Mehr freirum fpr ausrichtung gegen wimd
+ * dreh geschwindigkeit reltiv zu geschwindigkeit
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -19,8 +23,12 @@ public class ShipController : MonoBehaviour
     Vector2 sailForward = Vector2.up;//TODO: convert fromlocal to global
     Vector2 rudderForward = -Vector2.up;//TODO: might need inverting
 
-    //[Range(0.0f, 1.0f)] float keelStrength = 0.9f;
+    Vector2 worldSailForward = Vector2.up;//TODO: convert fromlocal to global
+    Vector2 worldRudderForward = -Vector2.up;//TODO: might need inverting
+
     [Range(0.0f, 1.0f)] float sailStrength = 1.0f;
+
+    [SerializeField][Range(0.0f, 1.0f)] float keelStrength = 0.9f;
     [SerializeField] float turnSpeed = 10.0f;
     [SerializeField] float speed = 10.0f;
 
@@ -42,18 +50,20 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    sailForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized;
+                    sailForward = input /*vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized*/;
                 }
             )
             .AddTo(this);
 
         input.shipDirection
-            .Where(v => v != Vector2.zero)
             .Subscribe
             (
                 input =>
                 {
-                    rudderForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized;
+                    if (input == Vector2.zero)
+                        rudderForward = Vector2.up;
+                    else
+                        rudderForward = -input /*vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized*/;
                 }
             )
             .AddTo(this);
@@ -64,7 +74,7 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    sailStrength = input;
+                    sailStrength = 1.0f-input;
                 }
             )
             .AddTo(this);
@@ -75,10 +85,14 @@ public class ShipController : MonoBehaviour
     void FixedUpdate()
     {
         shipForward = vector2FromVector3(transform.forward);
+        worldSailForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(sailForward))).normalized;
+        worldRudderForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(rudderForward))).normalized;
 
         rigid.AddForce(transform.forward * moveStrength());
 
         rigid.MoveRotation(rudderRotation());
+
+        rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
     }
 
     Quaternion rudderRotation()
@@ -92,7 +106,7 @@ public class ShipController : MonoBehaviour
 
     float rudderDrag()
     {
-        return Vector2.SignedAngle(shipForward, rudderForward) / 180.0f;
+        return Vector2.SignedAngle(shipForward, worldRudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude/speed/2.0f,0.0f,1.0f);
     }
 
     public static Vector2 vector2FromVector3(Vector3 v3)
@@ -106,12 +120,12 @@ public class ShipController : MonoBehaviour
 
     float relativeWindStrength()
     {
-        return windStrength * Vector2.Dot(windDir.normalized, sailForward.normalized);/*Vector2.Angle(windDir, sailForward) / 180.0f*/
+        return windStrength * Vector2.Dot(windDir.normalized, worldSailForward.normalized);/*Vector2.Angle(windDir, sailForward) / 180.0f*/
     }
 
    float moveStrength()//TODO: use keel strength
    {
-        float windShipMul = Vector2.Dot(shipForward.normalized, sailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
+        float windShipMul = Vector2.Dot(shipForward.normalized, worldSailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
         return sailStrength * speed * relativeWindStrength() * windShipMul;
    }
 
@@ -130,10 +144,10 @@ public class ShipController : MonoBehaviour
 
         //Sail direction
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + Vector3.up*2, transform.position + Vector3.up*2 + vector3FromVector2(sailForward) * 3.0f);
+        Gizmos.DrawLine(transform.position + Vector3.up*2, transform.position + Vector3.up*2 + vector3FromVector2(worldSailForward) * 3.0f);
 
         //Rudder direction
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position - transform.forward * 2.0f, transform.position + vector3FromVector2(rudderForward) - transform.forward*2.0f);
+        Gizmos.DrawLine(transform.position - transform.forward * 2.0f, transform.position + vector3FromVector2(worldRudderForward) - transform.forward*2.0f);
     }
 }
