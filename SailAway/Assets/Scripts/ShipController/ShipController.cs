@@ -18,6 +18,8 @@ using System.Security.Cryptography.X509Certificates;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour, IShipSignals
 {
+    Rigidbody rigid;
+
     public static Vector2 windDir = Vector2.up;
     public static float windStrength = 5.0f;
 
@@ -37,27 +39,28 @@ public class ShipController : MonoBehaviour, IShipSignals
     [SerializeField] float maxSailAngle = 90.0f;
     [SerializeField] float maxRudderAngle = 90.0f;
 
-    Rigidbody rigid;
-
-
     public ShipInput input;
 
     #region signals
-    public ReactiveProperty<float> sailAngle = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> rudderAngle = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> shiplTiltRelative = new ReactiveProperty<float>(0.0f);
-    public ReactiveProperty<float> shipSpeed = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _sailAngle;// = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _rudderAngle;// = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _shiplTiltRelative;// = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _shipSpeed;// = new ReactiveProperty<float>(0.0f);
 
+    public ReactiveProperty<float> sailAngle => _sailAngle;// = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> rudderAngle => _rudderAngle;// = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> shiplTiltRelative => _shiplTiltRelative;// = new ReactiveProperty<float>(0.0f);
+    public ReactiveProperty<float> shipSpeed => _shipSpeed;// = new ReactiveProperty<float>(0.0f);
     #endregion
-    /*
+    
     void Awake()
     {
-       sailAngle = new ReactiveProperty<float>(0.0f);
-       rudderAngle = new ReactiveProperty<float>(0.0f);
-       shiplTiltRelative = new ReactiveProperty<float>(0.0f);
-       IShipSignals.speed = new ReactiveProperty<float>(0.0f);
+       _sailAngle = new ReactiveProperty<float>(0.0f);
+       _rudderAngle = new ReactiveProperty<float>(0.0f);
+       _shiplTiltRelative = new ReactiveProperty<float>(0.0f);
+       _shipSpeed = new ReactiveProperty<float>(0.0f);
     }
-    */
+    
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -140,10 +143,10 @@ public class ShipController : MonoBehaviour, IShipSignals
         rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
 
         
-        sailAngle.value =  Vector2.SignedAngle(Vector2.up, sailForward);
-        rudderAngle.value =  Vector2.SignedAngle(Vector2.up, rudderForward);
-        shiplTiltRelative.value =  1.0f - Vector2.Dot(shipForward, windDir);
-        shipSpeed.value = rigid.velocity.magnitude;
+        _sailAngle.Value =  Vector2.SignedAngle(Vector2.up, sailForward);
+        _rudderAngle.Value =  Vector2.SignedAngle(Vector2.up, rudderForward);
+        _shiplTiltRelative.Value =  1.0f - Vector2.Dot(shipForward, windDir);
+        _shipSpeed.Value = rigid.velocity.magnitude;
     }
 
     Quaternion rudderRotation()
