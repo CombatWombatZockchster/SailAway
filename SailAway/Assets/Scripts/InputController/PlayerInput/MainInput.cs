@@ -36,9 +36,9 @@ public class @MainInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""SailIntensity"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""4cf2fc76-e448-40dd-bc79-5392c6d6dc57"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }

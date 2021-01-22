@@ -20,7 +20,7 @@ public abstract class ShipInput : MonoBehaviour
     /// change sail strength
     /// Interaction type: trigger.
     /// </summary>
-    public abstract IObservable<float> sailIntensity { get; }
+    public abstract ReadOnlyReactiveProperty<bool> sailIntensity { get; }
 
 }
 
