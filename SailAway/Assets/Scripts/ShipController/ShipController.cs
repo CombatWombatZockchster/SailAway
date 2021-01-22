@@ -10,8 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System;
 using UniRx;
 using UniRx.Triggers;
+using System.Security.Cryptography.X509Certificates;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour, IShipSignals
@@ -38,8 +40,44 @@ public class ShipController : MonoBehaviour, IShipSignals
     Rigidbody rigid;
 
 
-    public ShipInput input; 
+    public ShipInput input;
 
+
+    #region signals
+    /*
+    float sail()
+    {
+        return Vector2.SignedAngle(Vector2.up, sailForward);
+    }
+    float rudder()
+    {
+        return Vector2.SignedAngle(Vector2.up, sailForward);
+    }
+    float tilt()
+    {
+        return 1.0f - Vector2.Dot(shipForward, windDir);
+    }
+    */
+    private Subject<float> _sail;
+    private Subject<float> _rudder;
+    private Subject<float> _tilt;
+    private Subject<float> _speed;
+    IObservable<float> IShipSignals.sailAngle => _sail;
+
+    IObservable<float> IShipSignals.rudderlAngle => _rudder;
+
+    IObservable<float> IShipSignals.shiplTiltRelative => _tilt;
+
+    IObservable<float> IShipSignals.speed => _speed;
+    #endregion
+
+    void Awake()
+    {
+        _sail = new Subject<float>().AddTo(this);
+        _rudder = new Subject<float>().AddTo(this);
+        _tilt = new Subject<float>().AddTo(this);
+        _speed = new Subject<float>().AddTo(this);
+    }
 
     void Start()
     {
@@ -121,6 +159,13 @@ public class ShipController : MonoBehaviour, IShipSignals
         rigid.MoveRotation(rudderRotation());
 
         rigid.velocity = Vector3.Lerp(rigid.velocity, rigid.velocity.magnitude * transform.forward, keelStrength);
+
+        #region signals
+        _sail.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
+        _rudder.OnNext(Vector2.SignedAngle(Vector2.up, sailForward));
+        _tilt.OnNext(1.0f - Vector2.Dot(shipForward, windDir));
+        _speed.OnNext(rigid.velocity.magnitude);
+        #endregion
     }
 
     Quaternion rudderRotation()
