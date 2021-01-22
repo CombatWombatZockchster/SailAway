@@ -1,3 +1,7 @@
+/*
+ * Written by Jonas
+ * Applies semi realistic physics to the boat based on the input
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -9,7 +13,7 @@ using UniRx;
 public class ShipController : MonoBehaviour
 {
     public static Vector2 windDir = Vector2.up;
-    public static float windStrength = 10.0f;
+    public static float windStrength = 5.0f;
 
     Vector2 shipForward = Vector2.up;
     Vector2 sailForward = Vector2.up;//TODO: convert fromlocal to global
@@ -28,8 +32,6 @@ public class ShipController : MonoBehaviour
 
     void Start()
     {
-        //TODO: listen to input streams
-
         rigid = GetComponent<Rigidbody>();
 
 #region input
@@ -40,7 +42,7 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    sailForward = input.normalized;
+                    sailForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized;
                 }
             )
             .AddTo(this);
@@ -51,7 +53,7 @@ public class ShipController : MonoBehaviour
             (
                 input =>
                 {
-                    rudderForward = input.normalized;
+                    rudderForward = vector2FromVector3(transform.TransformDirection(vector3FromVector2(input))).normalized;
                 }
             )
             .AddTo(this);
@@ -109,7 +111,7 @@ public class ShipController : MonoBehaviour
 
    float moveStrength()//TODO: use keel strength
    {
-        float windShipMul = (1 - Vector2.Dot(shipForward.normalized, sailForward.normalized));//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
+        float windShipMul = Vector2.Dot(shipForward.normalized, sailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
         return sailStrength * speed * relativeWindStrength() * windShipMul;
    }
 
