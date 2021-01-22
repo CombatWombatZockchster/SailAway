@@ -16,13 +16,14 @@ public class SailRotation : MonoBehaviour
     {
         _shipSignals = shipObject.GetComponent<ShipController>();
         _sails = gameObject;
+        _shipSignals.sailAngle.Subscribe(a =>
+        {
+            _sails.transform.localRotation = Quaternion.Euler(0f, -a, 0f);
+        }).AddTo(this);
     }
 
     private void start()
     {
-        _shipSignals.sailAngle.Subscribe(a =>
-        {
-            _sails.transform.Rotate(0f, a, 0f);
-        }).AddTo(this);
+        
     }
 }
