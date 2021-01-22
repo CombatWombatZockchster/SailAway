@@ -17,7 +17,7 @@ public class RudderRotation : MonoBehaviour
         _rudder = gameObject;
     }
 
-    private void start()
+    private void Start()
     {
         _shipSignals.rudderAngle.Subscribe(a =>
         {

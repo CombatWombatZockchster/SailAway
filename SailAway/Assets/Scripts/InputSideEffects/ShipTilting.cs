@@ -15,11 +15,11 @@ public class ShipTilting : MonoBehaviour
         _shipSignals = gameObject.GetComponent<ShipController>();
     }
 
-    private void start()
+    private void Start()
     {
         _shipSignals.shiplTiltRelative.Subscribe(a =>
         {
-            gameObject.transform.Rotate(0f, 0f, a * maxAngle);
+            // gameObject.transform.localRotation = Quaternion.Euler(0f, 0f, a * maxAngle);
         }).AddTo(this);
     }
 }

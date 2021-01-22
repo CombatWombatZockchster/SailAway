@@ -19,11 +19,10 @@ public class SailRotation : MonoBehaviour
         
     }
 
-    private void start()
+    private void Start()
     {
-        _shipSignals.sailAngle.AsObservable().Subscribe(a =>
+        _shipSignals.sailAngle.Subscribe(a =>
         {
-            Debug.Log("Fire");
             _sails.transform.localRotation = Quaternion.Euler(0f, -a, 0f);
         }).AddTo(this);
     }
