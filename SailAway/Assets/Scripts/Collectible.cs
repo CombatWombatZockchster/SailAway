@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.SqlServer.Server;
 using UniRx;
 using UnityEngine;
 
@@ -7,9 +9,9 @@ public class Collectible : MonoBehaviour
 {
     public ReactiveProperty<int> counter = new ReactiveProperty<int>(0);
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.name == "Ship")
+        if (collider.gameObject.CompareTag("Player"))
         {
             IncrementCounter();
             Debug.Log("Du hast " + counter + " Kiste(n) gesammelt");
@@ -21,6 +23,7 @@ public class Collectible : MonoBehaviour
     {
         counter.Value++;
     }
+
 
     void DestroyGameObject()
     {
