@@ -7,16 +7,15 @@ using System.Collections.Generic;
 //Add this script to the sails of your boat
 public class SailRotation : MonoBehaviour
 {
-    // [SerializeField] 
-    // private GameObject shipObject;
+    [SerializeField] 
+    private GameObject shipObject;
     private IShipSignals _shipSignals;
     private GameObject _sails;
 
     private void Awake()
     {
-        _shipSignals = transform.parent.GetComponent<ShipController>();
+        _shipSignals = shipObject.GetComponent<ShipController>();
         _sails = gameObject;
-        
     }
 
     private void Start()

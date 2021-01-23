@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705843401560388192, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+      propertyPath: _shipSignals
+      value: 
+      objectReference: {fileID: 7537213300882949058}
     - target: {fileID: 7537213301080648741, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
       propertyPath: m_Name
       value: Ship
@@ -273,6 +277,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+--- !u!114 &7537213300882949058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6125351282983537455, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+  m_PrefabInstance: {fileID: 7537213300882949056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1dd08092710124db19045bc438132d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9172438542463791407
 PrefabInstance:
   m_ObjectHideFlags: 0
