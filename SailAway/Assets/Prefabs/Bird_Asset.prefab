@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2610478717228240002
+--- !u!1 &327365814000882443
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,31 +8,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3418680869864019512}
+  - component: {fileID: 3853730851442644737}
   m_Layer: 0
-  m_Name: Bird_Asset
+  m_Name: Bird_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3418680869864019512
+--- !u!4 &3853730851442644737
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610478717228240002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 327365814000882443}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.00005488532, y: 0.024271173, z: 0.050359182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6604934861512473410}
-  - {fileID: 4951265501621752583}
-  m_Father: {fileID: 0}
+  - {fileID: 4812706283477566427}
+  m_Father: {fileID: 4729864461200112251}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4964560739614457040
+--- !u!1 &1684278959237012265
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +39,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4951265501621752583}
-  - component: {fileID: 4822543474601790943}
+  - component: {fileID: 253030761923086054}
+  m_Layer: 0
+  m_Name: Bird_LeftWing_Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &253030761923086054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684278959237012265}
+  m_LocalRotation: {x: 0, y: 0.2554342, z: -0, w: 0.9668265}
+  m_LocalPosition: {x: -0.04510693, y: 0.002313515, z: -8.881784e-18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8103474722741012806}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3042158707445682323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3054618348218695492}
+  - component: {fileID: 3188371741243875740}
   m_Layer: 0
   m_Name: BirdRetop:polySurface1
   m_TagString: Untagged
@@ -49,27 +78,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4951265501621752583
+--- !u!4 &3054618348218695492
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964560739614457040}
+  m_GameObject: {fileID: 3042158707445682323}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3418680869864019512}
+  m_Father: {fileID: 4729864461200112251}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &4822543474601790943
+--- !u!137 &3188371741243875740
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964560739614457040}
+  m_GameObject: {fileID: 3042158707445682323}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -82,7 +111,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1294284738371021749, guid: 3f901c95d504cae4a96dce1479ce0881, type: 3}
+  - {fileID: 2100000, guid: 97c79d705c955124a9144bc4fcd47bb9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,17 +138,17 @@ SkinnedMeshRenderer:
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -1995720272617593764, guid: 3f901c95d504cae4a96dce1479ce0881, type: 3}
   m_Bones:
-  - {fileID: 6604934861512473410}
-  - {fileID: 3177404248031768472}
-  - {fileID: 2208753770289784069}
-  - {fileID: 8364673707903041010}
+  - {fileID: 3853730851442644737}
+  - {fileID: 4812706283477566427}
+  - {fileID: 8103474722741012806}
+  - {fileID: 1929520735741841841}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 6604934861512473410}
+  m_RootBone: {fileID: 3853730851442644737}
   m_AABB:
     m_Center: {x: -0.054962963, y: -0.0064553935, z: 0.00064074807}
     m_Extent: {x: 0.044911638, y: 0.01040159, z: 0.05197812}
   m_DirtyAABB: 0
---- !u!1 &5898721104612342248
+--- !u!1 &3739146686471814666
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,100 +156,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2208753770289784069}
-  m_Layer: 0
-  m_Name: Bird_LeftWing_Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2208753770289784069
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5898721104612342248}
-  m_LocalRotation: {x: 0, y: -0.17481945, z: -0, w: 0.9846005}
-  m_LocalPosition: {x: -0.008469966, y: -0.0019944096, z: -7.494005e-18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7876989995357350565}
-  m_Father: {fileID: 3177404248031768472}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6514510998086336560
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5643529793553905755}
-  m_Layer: 0
-  m_Name: Bird_RightWing_Tip
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5643529793553905755
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6514510998086336560}
-  m_LocalRotation: {x: -7.728831e-17, y: 0.95001775, z: 7.728831e-17, w: 0.31219602}
-  m_LocalPosition: {x: -0.041775227, y: 0.0022337385, z: 1.4882925e-17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8364673707903041010}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6515495767876836643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3177404248031768472}
-  m_Layer: 0
-  m_Name: Bird_Body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3177404248031768472
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6515495767876836643}
-  m_LocalRotation: {x: 0, y: 0.6463749, z: -0, w: 0.76302}
-  m_LocalPosition: {x: -0.03898871, y: 0, z: -8.6572326e-18}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_Children:
-  - {fileID: 2208753770289784069}
-  - {fileID: 8364673707903041010}
-  m_Father: {fileID: 6604934861512473410}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6716657668871918153
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8364673707903041010}
+  - component: {fileID: 1929520735741841841}
   m_Layer: 0
   m_Name: Bird_RightWing_Pivot
   m_TagString: Untagged
@@ -228,22 +164,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8364673707903041010
+--- !u!4 &1929520735741841841
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6716657668871918153}
+  m_GameObject: {fileID: 3739146686471814666}
   m_LocalRotation: {x: 3.905532e-17, y: 0.95001775, z: -3.905532e-17, w: -0.31219596}
   m_LocalPosition: {x: 0.007935824, y: -0.0020741858, z: -0.0032048519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5643529793553905755}
-  m_Father: {fileID: 3177404248031768472}
+  - {fileID: 2342886637566268440}
+  m_Father: {fileID: 4812706283477566427}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7663239737965657928
+--- !u!1 &3799334292893774176
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,30 +187,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6604934861512473410}
+  - component: {fileID: 4812706283477566427}
   m_Layer: 0
-  m_Name: Bird_Root
+  m_Name: Bird_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6604934861512473410
+--- !u!4 &4812706283477566427
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663239737965657928}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.00005488532, y: 0.024271173, z: 0.050359182}
+  m_GameObject: {fileID: 3799334292893774176}
+  m_LocalRotation: {x: 0, y: 0.6463749, z: -0, w: 0.76302}
+  m_LocalPosition: {x: -0.03898871, y: 0, z: -8.6572326e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3177404248031768472}
-  m_Father: {fileID: 3418680869864019512}
+  - {fileID: 8103474722741012806}
+  - {fileID: 1929520735741841841}
+  m_Father: {fileID: 3853730851442644737}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8758797878488741738
+--- !u!1 &3799476457998609523
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,25 +219,88 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7876989995357350565}
+  - component: {fileID: 2342886637566268440}
   m_Layer: 0
-  m_Name: Bird_LeftWing_Tip
+  m_Name: Bird_RightWing_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7876989995357350565
+--- !u!4 &2342886637566268440
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8758797878488741738}
-  m_LocalRotation: {x: 0, y: 0.2554342, z: -0, w: 0.9668265}
-  m_LocalPosition: {x: -0.04510693, y: 0.002313515, z: -8.881784e-18}
+  m_GameObject: {fileID: 3799476457998609523}
+  m_LocalRotation: {x: -7.728831e-17, y: 0.95001775, z: 7.728831e-17, w: 0.31219602}
+  m_LocalPosition: {x: -0.041775227, y: 0.0022337385, z: 1.4882925e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2208753770289784069}
+  m_Father: {fileID: 1929520735741841841}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4543627477041026475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8103474722741012806}
+  m_Layer: 0
+  m_Name: Bird_LeftWing_Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8103474722741012806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543627477041026475}
+  m_LocalRotation: {x: 0, y: -0.17481945, z: -0, w: 0.9846005}
+  m_LocalPosition: {x: -0.008469966, y: -0.0019944096, z: -7.494005e-18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 253030761923086054}
+  m_Father: {fileID: 4812706283477566427}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5397575176422678721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4729864461200112251}
+  m_Layer: 0
+  m_Name: Bird_Asset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4729864461200112251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5397575176422678721}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 3853730851442644737}
+  - {fileID: 3054618348218695492}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
