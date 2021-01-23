@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 7537213300258203772}
   - component: {fileID: 7537213300258203775}
   - component: {fileID: 7537213300258203774}
+  - component: {fileID: 910225699}
   m_Layer: 0
   m_Name: Ruder
   m_TagString: Untagged
@@ -197,6 +198,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &910225699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537213300258203771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cb7801eb7088b4086ecf23e87357df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipObject: {fileID: 7537213301080648741}
 --- !u!1 &7537213301080648741
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,8 +220,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7537213301080648742}
-  - component: {fileID: 7537213300882949058}
-  - component: {fileID: 7537213300882949060}
   - component: {fileID: 7537213300882949059}
   - component: {fileID: 6125351282983537455}
   - component: {fileID: 8003631171463970792}
@@ -237,36 +249,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7537213300882949058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537213301080648741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1dd08092710124db19045bc438132d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keelStrength: 0.9
-  turnSpeed: 0.5
-  speed: 3
-  maxSailAngle: 90
-  maxRudderAngle: 90
-  input: {fileID: 7537213300882949060}
---- !u!114 &7537213300882949060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537213301080648741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 648dd084ae36b194ba44a8b59e837329, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7537213300882949059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -313,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648dd084ae36b194ba44a8b59e837329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sailSmoothing: 25
+  rudderSmoothing: 2000
 --- !u!114 &7537213300882949063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d68dccce72a75459824f9ffcc56a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipObject: {fileID: 7537213301080648741}
 --- !u!1 &7537213301602307234
 GameObject:
   m_ObjectHideFlags: 0

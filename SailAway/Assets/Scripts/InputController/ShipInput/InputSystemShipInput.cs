@@ -8,6 +8,12 @@ using UniRx.Triggers;
 
 public class InputSystemShipInput : ShipInput
 {
+    
+    private Vector2 smoothSails = new Vector2(0,0);
+    public float sailSmoothing = 25f;
+    private Vector2 smoothRudder = new Vector2(0, 0);
+    public float rudderSmoothing = 20f;
+    
     private IObservable<Vector2> _sailDirection;
     private IObservable<Vector2> _shipDirection;
     private IObservable<float> _sailIntensity;
@@ -49,13 +55,22 @@ public class InputSystemShipInput : ShipInput
         //Sail direction
         _sailDirection = this.UpdateAsObservable().Select(_ =>
         {
-            return controls.OpenSea.SailDirection.ReadValue<Vector2>();
+            
+            var currentValue = controls.OpenSea.SailDirection.ReadValue<Vector2>();
+            smoothSails = new Vector2(
+                Mathf.Lerp(smoothSails.x, currentValue.x, sailSmoothing * Time.deltaTime),
+                Mathf.Lerp(smoothSails.y, currentValue.y, sailSmoothing * Time.deltaTime));
+            return smoothSails;
         });
         
         //Ship direction
         _shipDirection = this.UpdateAsObservable().Select(_ =>
         {
-            return controls.OpenSea.ShipDirection.ReadValue<Vector2>();
+            var currentValue = controls.OpenSea.ShipDirection.ReadValue<Vector2>();
+            smoothRudder = new Vector2(
+                Mathf.Lerp(smoothRudder.x, currentValue.x, rudderSmoothing * Time.deltaTime),
+                Mathf.Lerp(smoothRudder.y, currentValue.y, rudderSmoothing * Time.deltaTime));
+            return smoothRudder;
         });
         
         //Sail Intensity
