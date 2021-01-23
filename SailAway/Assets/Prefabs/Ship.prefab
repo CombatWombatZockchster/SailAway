@@ -116,6 +116,51 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &2645669255854169961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879932484979498670}
+  - component: {fileID: 988131330499491359}
+  m_Layer: 0
+  m_Name: Sailes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &879932484979498670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645669255854169961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.905, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7537213302027331159}
+  m_Father: {fileID: 7537213301190425843}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &988131330499491359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645669255854169961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec7ec9e77d3e94498ced5df0c383d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipObject: {fileID: 7537213301080648741}
 --- !u!1 &6222099978930997547
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +316,6 @@ GameObject:
   - component: {fileID: 7537213300882949059}
   - component: {fileID: 6125351282983537455}
   - component: {fileID: 8003631171463970792}
-  - component: {fileID: 7537213300882949063}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -343,20 +387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sailSmoothing: 25
   rudderSmoothing: 2000
---- !u!114 &7537213300882949063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537213301080648741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028ec72da9295994ea930e45e46a41b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shipObject: {fileID: 0}
-  maxAngle: 45
 --- !u!1 &7537213301190425842
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +417,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 0.1, y: 1.5, z: 0.1}
   m_Children:
-  - {fileID: 7537213302027331159}
+  - {fileID: 879932484979498670}
   m_Father: {fileID: 3782095423914768244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -574,10 +604,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7537213302027331158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.58}
+  m_LocalPosition: {x: 0, y: -0.75, z: 1.58}
   m_LocalScale: {x: 23.144, y: 1.4846, z: 1}
   m_Children: []
-  m_Father: {fileID: 7537213301190425843}
+  m_Father: {fileID: 879932484979498670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7537213302027331162
