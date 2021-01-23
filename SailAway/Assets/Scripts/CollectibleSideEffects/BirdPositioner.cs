@@ -6,11 +6,11 @@ using UnityEngine.Serialization;
 public class BirdPositioner : MonoBehaviour
 {
     public GameObject[] birds;
-    public float maxRadius = 10f;
+    public float maxRadius = 100f;
     private float _radius;
     private float _targetRadius;
     public AnimationCurve curve;
-    public float speed;
+    public float speed = 30f;
     public GameObject playerShip;
     
     void FixedUpdate()
@@ -21,7 +21,7 @@ public class BirdPositioner : MonoBehaviour
         {
             
             float angle = speed * Time.fixedTime + (360 / birds.Length) * i;
-            birds[i].transform.localPosition = new Vector3( Mathf.Cos(Mathf.Deg2Rad * angle) * _radius, 1f,
+            birds[i].transform.localPosition = new Vector3( Mathf.Cos(Mathf.Deg2Rad * angle) * _radius, 2f,
                 Mathf.Sin(Mathf.Deg2Rad * angle) * _radius);
             birds[i].transform.localRotation = Quaternion.Euler(0f, 180f - angle, 0f);
         }
