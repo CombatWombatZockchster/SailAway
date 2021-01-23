@@ -20,8 +20,8 @@ public class BirdPositioner : MonoBehaviour
         for (int i = 0; i < birds.Length; i++)
         {
             
-            float angle = speed * Time.fixedTime + (360 / birds.Length) * i + i * 3;
-            birds[i].transform.localPosition = new Vector3( Mathf.Cos(Mathf.Deg2Rad * angle) * (_radius + i * 3), 2f,
+            float angle = speed * Time.fixedTime + (360 / birds.Length) * i;
+            birds[i].transform.localPosition = new Vector3( Mathf.Cos(Mathf.Deg2Rad * angle) * _radius, 2f,
                 Mathf.Sin(Mathf.Deg2Rad * angle) * _radius);
             birds[i].transform.localRotation = Quaternion.Euler(0f, 180f - angle, 0f);
         }
