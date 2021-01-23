@@ -216,6 +216,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1223056594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7537213301080648741, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+  m_PrefabInstance: {fileID: 7537213300882949056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7537213300882949056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +232,14 @@ PrefabInstance:
       propertyPath: _shipSignals
       value: 
       objectReference: {fileID: 7537213300882949058}
+    - target: {fileID: 7537213300882949063, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537213300882949063, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
+      propertyPath: shipObject
+      value: 
+      objectReference: {fileID: 1223056594}
     - target: {fileID: 7537213301080648741, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
       propertyPath: m_Name
       value: Ship
@@ -275,14 +288,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7537213300882949063, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
 --- !u!114 &7537213300882949058 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6125351282983537455, guid: 9560feb40c6d845488c186d10d5e4cee, type: 3}
   m_PrefabInstance: {fileID: 7537213300882949056}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1223056594}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf1dd08092710124db19045bc438132d, type: 3}

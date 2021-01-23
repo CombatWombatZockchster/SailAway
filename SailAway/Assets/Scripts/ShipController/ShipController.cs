@@ -46,11 +46,13 @@ public class ShipController : MonoBehaviour, IShipSignals
     private ReactiveProperty<float> _rudderAngle = new ReactiveProperty<float>(0.0f);
     private ReactiveProperty<float> _shiplTiltRelative = new ReactiveProperty<float>(0.0f);
     private ReactiveProperty<float> _shipSpeed = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<float> _sailIntesity = new ReactiveProperty<float>(0.0f);
 
     public ReactiveProperty<float> sailAngle => _sailAngle;
     public ReactiveProperty<float> rudderAngle => _rudderAngle;
     public ReactiveProperty<float> shiplTiltRelative => _shiplTiltRelative;
     public ReactiveProperty<float> shipSpeed => _shipSpeed;
+    public ReactiveProperty<float> sailIntensity => _sailIntensity;
     #endregion
     
     void Awake()
@@ -147,8 +149,9 @@ public class ShipController : MonoBehaviour, IShipSignals
         
         _sailAngle.Value = Vector2.SignedAngle(Vector2.up, sailForward);
         _rudderAngle.Value = Vector2.SignedAngle(-Vector2.up, rudderForward);
-        _shiplTiltRelative.Value = 1.0f - Vector2.Dot(shipForward, windDir);
+        _shiplTiltRelative.Value = Mathf.Sin(Mathf.Deg2Rad * Vector2.SignedAngle(shipForward, windDir));
         _shipSpeed.Value = rigid.velocity.magnitude;
+        _sailIntesity = sailStrength;
     }
 
     Quaternion rudderRotation()
