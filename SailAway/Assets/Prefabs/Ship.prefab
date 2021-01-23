@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipObject: {fileID: 7537213301080648741}
-  maxAngle: 45
+  maxAngle: 25
 --- !u!1 &7537213300258203771
 GameObject:
   m_ObjectHideFlags: 0

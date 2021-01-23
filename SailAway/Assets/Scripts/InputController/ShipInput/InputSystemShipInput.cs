@@ -13,6 +13,7 @@ public class InputSystemShipInput : ShipInput
     public float sailSmoothing = 25f;
     private Vector2 smoothRudder = new Vector2(0, 0);
     public float rudderSmoothing = 20f;
+    private float smoothIntensity = 0f;
     
     private IObservable<Vector2> _sailDirection;
     private IObservable<Vector2> _shipDirection;
@@ -76,7 +77,9 @@ public class InputSystemShipInput : ShipInput
         //Sail Intensity
         _sailIntensity = this.UpdateAsObservable().Select(_ =>
         {
-            return controls.OpenSea.SailIntensity.ReadValue<float>();
+            var currentValue =  controls.OpenSea.SailIntensity.ReadValue<float>();
+            smoothIntensity = Mathf.Lerp(smoothIntensity, currentValue, 6 * Time.deltaTime);
+            return smoothIntensity;
         });
 
     }
