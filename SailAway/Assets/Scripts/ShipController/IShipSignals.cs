@@ -12,4 +12,5 @@ public interface IShipSignals
     ReactiveProperty<float> shiplTiltRelative { get; }//[-1,1]
     ReactiveProperty<float> shipSpeed{ get; }
     ReactiveProperty<float> sailIntensity{ get; }//[0,1]
+    ReactiveProperty<Vector3> windDirection{ get; }//[0,1]
 }

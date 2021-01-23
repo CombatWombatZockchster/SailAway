@@ -34,6 +34,7 @@ public class ShipController : MonoBehaviour, IShipSignals
 
     [SerializeField][Range(0.0f, 1.0f)] float keelStrength = 0.9f;
     [SerializeField] float turnSpeed = 10.0f;
+    [SerializeField][Range(0.0f, 1.0f)] float minRudderDrag = 0.15f;
     [SerializeField] float speed = 10.0f;
 
     [SerializeField] float maxSailAngle = 90.0f;
@@ -47,14 +48,24 @@ public class ShipController : MonoBehaviour, IShipSignals
     private ReactiveProperty<float> _shiplTiltRelative = new ReactiveProperty<float>(0.0f);
     private ReactiveProperty<float> _shipSpeed = new ReactiveProperty<float>(0.0f);
     private ReactiveProperty<float> _sailIntesity = new ReactiveProperty<float>(0.0f);
+    private ReactiveProperty<Vector3> _windDirection = new ReactiveProperty<Vector3>(vector3FromVector2(windDir));
 
     public ReactiveProperty<float> sailAngle => _sailAngle;
     public ReactiveProperty<float> rudderAngle => _rudderAngle;
     public ReactiveProperty<float> shiplTiltRelative => _shiplTiltRelative;
     public ReactiveProperty<float> shipSpeed => _shipSpeed;
     public ReactiveProperty<float> sailIntensity => _sailIntesity;
-    #endregion
+    public ReactiveProperty<Vector3> windDirection => _windDirection;
+   
+    public void setWindDirection(Vector3 v3)
+    {
+        Vector2 v2 = vector2FromVector3(v3);
+        windDir = v2;
+        _windDirection.Value = v3;
+    }
     
+    #endregion
+
     void Awake()
     {
         /*
@@ -149,7 +160,7 @@ public class ShipController : MonoBehaviour, IShipSignals
         
         _sailAngle.Value = Vector2.SignedAngle(Vector2.up, sailForward);
         _rudderAngle.Value = Vector2.SignedAngle(-Vector2.up, rudderForward);
-        _shiplTiltRelative.Value = Mathf.Sin(Mathf.Deg2Rad * Vector2.SignedAngle(shipForward, windDir));
+        _shiplTiltRelative.Value = Mathf.Sin(Mathf.Deg2Rad * Vector2.SignedAngle(shipForward, windDir)) * sailStrength;
         _shipSpeed.Value = rigid.velocity.magnitude;
         _sailIntesity.Value = sailStrength;
     }
@@ -163,7 +174,15 @@ public class ShipController : MonoBehaviour, IShipSignals
 
     float rudderDrag()
     {
-        return Vector2.SignedAngle(-Vector2.up, rudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
+        float f = Vector2.SignedAngle(-Vector2.up, rudderForward) / 180.0f * Mathf.Clamp(rigid.velocity.magnitude / speed, 0.0f, 1.0f);
+        float a = Mathf.Clamp(Mathf.Abs(f), minRudderDrag, 1.0f);
+        float v = rudderForward.x;
+        if (v != 0)
+        {
+            v /= Mathf.Abs(rudderForward.x);
+            return v * a;
+        }
+        else return 0;
     }
 
     public static Vector2 vector2FromVector3(Vector3 v3)
