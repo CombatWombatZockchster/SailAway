@@ -201,8 +201,9 @@ public class ShipController : MonoBehaviour, IShipSignals
 
    float moveStrength()
    {
-        //float windShipMul = Vector2.Dot(shipForward.normalized, worldSailForward.normalized);//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f)
-        return sailStrength * speed * relativeWindStrength(); //* windShipMul;
+        float windShipMul = (Vector2.Dot(shipForward.normalized, windDir.normalized)/5) + 0.8f;//(1 - (Vector2.Angle(shipForward, sailForward) / 180.0f
+        Debug.Log(windShipMul);
+        return sailStrength * speed * relativeWindStrength() * Mathf.Clamp(windShipMul, 0.8f, 1.0f);
    }
 
 
