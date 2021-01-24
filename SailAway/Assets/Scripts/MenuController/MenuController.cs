@@ -9,7 +9,7 @@ using Unity.Mathematics;
 public class MenuController : MonoBehaviour
 {
     private bool _inHelpScreen = false;
-    private bool inAnimation = false;
+    private bool _inAnimation = false;
     public MenuInput input;
     public float time = 5;
 
@@ -30,12 +30,12 @@ public class MenuController : MonoBehaviour
         help.enabled = false;
         input.help.Subscribe(a =>
         {
-            if (a && !inAnimation)
+            if (a && !_inAnimation)
                 StartCoroutine(changeScreen());
         }).AddTo(this);
         input.start.Subscribe(a =>
         {
-            if (a && !inAnimation)
+            if (a && !_inAnimation && !_inHelpScreen)
                 startGame();
         }).AddTo(this);
     }
@@ -44,7 +44,7 @@ public class MenuController : MonoBehaviour
     {
         if (_inHelpScreen)
         {
-            inAnimation = true;
+            _inAnimation = true;
             help.enabled = false;
             _inHelpScreen = false;
             float elapsedTime = 0f;
@@ -58,11 +58,11 @@ public class MenuController : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             start.enabled = true;
-            inAnimation = false;
+            _inAnimation = false;
         }
         else
         {
-            inAnimation = true;
+            _inAnimation = true;
             _inHelpScreen = true;
             start.enabled = false;
             float elapsedTime = 0f;
@@ -76,7 +76,7 @@ public class MenuController : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             help.enabled = true;
-            inAnimation = false;
+            _inAnimation = false;
         }
     }
 
