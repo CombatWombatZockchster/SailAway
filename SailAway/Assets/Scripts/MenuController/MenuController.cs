@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
     public Vector3 cameraPosHelpScreen;
 
     private Vector3 _cameraPosStartScreen;
+    private Quaternion _cameraRotStartScreen;
     public Canvas start;
     public Canvas help;
     
@@ -22,6 +23,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         _cameraPosStartScreen = camera.transform.position;
+        _cameraRotStartScreen = camera.transform.rotation;
         help.enabled = false;
         input.help.Subscribe(a =>
         {
@@ -40,6 +42,7 @@ public class MenuController : MonoBehaviour
         if (_inHelpScreen)
         {
             camera.transform.position = _cameraPosStartScreen;
+            camera.transform.rotation = _cameraRotStartScreen;
             start.enabled = true;
             help.enabled = false;
             _inHelpScreen = false;
@@ -47,6 +50,7 @@ public class MenuController : MonoBehaviour
         else
         {
             camera.transform.position = cameraPosHelpScreen;
+            camera.transform.rotation = Quaternion.Euler(0, 0, 0);
             start.enabled = false;
             help.enabled = true;
             _inHelpScreen = true;
