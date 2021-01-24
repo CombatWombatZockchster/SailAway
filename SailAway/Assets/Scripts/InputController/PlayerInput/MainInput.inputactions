@@ -186,6 +186,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu Navigation",
+            "id": "22c3679a-6e96-4870-bc22-f1de1c1d0a26",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "6ee8388b-23c6-44b7-b48b-4ed81fca3117",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Help",
+                    "type": "Button",
+                    "id": "74b7e85d-1163-4361-bc79-4e4c280ddf79",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9979ad96-13e0-4f85-93f3-eb7c0e234578",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8284356-27c6-4276-90fe-4054650a4125",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc87d39d-1a30-4f5a-9323-54ebd096b849",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Help",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "831dce11-e38e-48f3-ab99-8bc5bb89e97b",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Help",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

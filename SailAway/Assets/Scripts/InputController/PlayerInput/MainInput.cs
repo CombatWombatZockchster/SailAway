@@ -199,6 +199,74 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu Navigation"",
+            ""id"": ""22c3679a-6e96-4870-bc22-f1de1c1d0a26"",
+            ""actions"": [
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ee8388b-23c6-44b7-b48b-4ed81fca3117"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Help"",
+                    ""type"": ""Button"",
+                    ""id"": ""74b7e85d-1163-4361-bc79-4e4c280ddf79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9979ad96-13e0-4f85-93f3-eb7c0e234578"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8284356-27c6-4276-90fe-4054650a4125"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc87d39d-1a30-4f5a-9323-54ebd096b849"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""831dce11-e38e-48f3-ab99-8bc5bb89e97b"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -231,6 +299,10 @@ public class @MainInput : IInputActionCollection, IDisposable
         m_OpenSea_SailDirection = m_OpenSea.FindAction("SailDirection", throwIfNotFound: true);
         m_OpenSea_ShipDirection = m_OpenSea.FindAction("ShipDirection", throwIfNotFound: true);
         m_OpenSea_SailIntensity = m_OpenSea.FindAction("SailIntensity", throwIfNotFound: true);
+        // Menu Navigation
+        m_MenuNavigation = asset.FindActionMap("Menu Navigation", throwIfNotFound: true);
+        m_MenuNavigation_Start = m_MenuNavigation.FindAction("Start", throwIfNotFound: true);
+        m_MenuNavigation_Help = m_MenuNavigation.FindAction("Help", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -325,6 +397,47 @@ public class @MainInput : IInputActionCollection, IDisposable
         }
     }
     public OpenSeaActions @OpenSea => new OpenSeaActions(this);
+
+    // Menu Navigation
+    private readonly InputActionMap m_MenuNavigation;
+    private IMenuNavigationActions m_MenuNavigationActionsCallbackInterface;
+    private readonly InputAction m_MenuNavigation_Start;
+    private readonly InputAction m_MenuNavigation_Help;
+    public struct MenuNavigationActions
+    {
+        private @MainInput m_Wrapper;
+        public MenuNavigationActions(@MainInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Start => m_Wrapper.m_MenuNavigation_Start;
+        public InputAction @Help => m_Wrapper.m_MenuNavigation_Help;
+        public InputActionMap Get() { return m_Wrapper.m_MenuNavigation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuNavigationActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuNavigationActions instance)
+        {
+            if (m_Wrapper.m_MenuNavigationActionsCallbackInterface != null)
+            {
+                @Start.started -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnStart;
+                @Help.started -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnHelp;
+                @Help.performed -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnHelp;
+                @Help.canceled -= m_Wrapper.m_MenuNavigationActionsCallbackInterface.OnHelp;
+            }
+            m_Wrapper.m_MenuNavigationActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
+                @Help.started += instance.OnHelp;
+                @Help.performed += instance.OnHelp;
+                @Help.canceled += instance.OnHelp;
+            }
+        }
+    }
+    public MenuNavigationActions @MenuNavigation => new MenuNavigationActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -348,5 +461,10 @@ public class @MainInput : IInputActionCollection, IDisposable
         void OnSailDirection(InputAction.CallbackContext context);
         void OnShipDirection(InputAction.CallbackContext context);
         void OnSailIntensity(InputAction.CallbackContext context);
+    }
+    public interface IMenuNavigationActions
+    {
+        void OnStart(InputAction.CallbackContext context);
+        void OnHelp(InputAction.CallbackContext context);
     }
 }
