@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //[RequireComponent(typeof(AudioSource))]
 public class Obstacle : MonoBehaviour
@@ -35,7 +36,8 @@ public class Obstacle : MonoBehaviour
                 if(relativeSpeed >= hardHitSpeed)
                 {
                     source.PlayOneShot(hardHit, Mathf.Clamp(hardVolume, 0.0f, 1.0f));
-                    //TODO: End game
+                    StaticGameState.loseGame();
+                    SceneManager.LoadScene(0);
                 }
                 else
                 {

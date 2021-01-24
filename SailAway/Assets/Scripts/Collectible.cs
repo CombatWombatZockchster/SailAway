@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Microsoft.SqlServer.Server;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Collectible : MonoBehaviour
 {
-    public ReactiveProperty<int> counter = new ReactiveProperty<int>(0);
+    public static ReactiveProperty<int> counter = new ReactiveProperty<int>(0);
 
     void OnTriggerEnter(Collider collider)
     {
@@ -16,6 +17,12 @@ public class Collectible : MonoBehaviour
             IncrementCounter();
             Debug.Log("Du hast " + counter + " Kiste(n) gesammelt");
             DestroyGameObject();
+        }
+
+        if (counter.Value == 6)
+        {
+            StaticGameState.winGame();
+            SceneManager.LoadScene(0);
         }
     }
 

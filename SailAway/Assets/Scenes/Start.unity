@@ -478,8 +478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff456d33cab4864eacafd904246845c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter:
-    value: 0
 --- !u!65 &229843583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1039,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 2305884517879589050, guid: 6ebc7d1f4d45ceb4580e40a184539ec2, type: 3}
       propertyPath: playerShip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 668478267}
     - target: {fileID: 2305884517879589050, guid: 6ebc7d1f4d45ceb4580e40a184539ec2, type: 3}
       propertyPath: curve.m_Curve.Array.size
       value: 2
@@ -1827,11 +1825,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1331756703}
+  - {fileID: 1283764568}
   - {fileID: 1723041843}
+  - {fileID: 1388569288}
   - {fileID: 373035412}
   - {fileID: 98645185}
-  - {fileID: 1388569288}
-  - {fileID: 1283764568}
   - {fileID: 1106742749}
   m_Father: {fileID: 0}
   m_RootOrder: 6
