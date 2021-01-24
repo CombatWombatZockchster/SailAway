@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8001844370556779582}
   - component: {fileID: 8001844370556779583}
   - component: {fileID: 8001844370556779576}
+  - component: {fileID: 715572659}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -59,7 +60,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -132,7 +133,97 @@ MonoBehaviour:
   target: {fileID: 0}
   height: 6
   distance: 12
-  turnSwing: 2
+  turnSwing: 4
+  swingResponse:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.26575506
+      value: 0.032540657
+      inSlope: 0.24834722
+      outSlope: 0.24834722
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14129454
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6516075
+      value: 0.40402365
+      inSlope: 2.1235464
+      outSlope: 2.1235464
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1195166
+      outWeight: 0.06925648
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   smoothPos: 5
   smoothRot: 7
+  expectedMaxSpeed: 20
+--- !u!114 &715572659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001844370556779577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bd732edf67cc24fa91a76f4724e7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 0}
+  fastFOVBoost: 20
+  speedResponse:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.38587278
+      value: 0.12624201
+      inSlope: 0.4331519
+      outSlope: 0.4331519
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14105926
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   expectedMaxSpeed: 20

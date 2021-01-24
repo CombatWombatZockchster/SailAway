@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float height = 5.0f;
     [SerializeField] float distance = 7.0f;
     [SerializeField] float turnSwing = 2.0f;
+    [SerializeField] AnimationCurve swingResponse = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
     [SerializeField] float smoothPos = 10.0f; 
     [SerializeField] float smoothRot = 10.0f;
 
@@ -31,12 +32,14 @@ public class CameraController : MonoBehaviour
     {
         _shipSignals.rudderAngle.Subscribe(a =>
         {
-            swing = a / 90.0f;
+            swing = a / 90.0f;          
         }).AddTo(this);
 
         _shipSignals.shipSpeed.Subscribe(a =>
         {
             speed = Mathf.Clamp(a / expectedMaxSpeed, 0.0f, 1.0f);
+            speed = swingResponse.Evaluate(speed);
+            //Debug.Log(a + ", " + speed);
         }).AddTo(this);
     }
 
