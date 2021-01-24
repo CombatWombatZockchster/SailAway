@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEditor.U2D;
 
 [RequireComponent(typeof(AudioSource))]
 public class WindSound : MonoBehaviour
 {
-    [SerializeField][Range(0.0f, 1.0f)] float minVolume = 0.1f;
-    [SerializeField] [Range(0.0f, 1.0f)] float maxVolume = 1.0f;
+    [SerializeField] AnimationCurve speedResponse = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+    [SerializeField] float expectedMaxSpeed = 20.0f;
+    float lv = 0;
 
     AudioSource source;
-
-    [SerializeField] float expectedMaxSpeed = 20.0f;
 
     IShipSignals signal;
     [SerializeField] GameObject ship;
@@ -29,7 +29,7 @@ public class WindSound : MonoBehaviour
         (
             a =>
             {
-                source.volume = Mathf.Clamp(a / expectedMaxSpeed, minVolume, maxVolume);
+                source.volume = speedResponse.Evaluate(a / expectedMaxSpeed);
             }
         ).AddTo(this);
     }
