@@ -8,8 +8,8 @@ public class Debugscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     // StaticGameState.winGame();
-     StaticGameState.loseGame();
+     StaticGameState.winGame();
+     // StaticGameState.loseGame();
      SceneManager.LoadScene(0);
     }
 
