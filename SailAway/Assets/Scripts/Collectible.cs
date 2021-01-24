@@ -8,27 +8,45 @@ using UnityEngine.SceneManagement;
 
 public class Collectible : MonoBehaviour
 {
-    public static ReactiveProperty<int> counter = new ReactiveProperty<int>(0);
+    //public ReactiveProperty<int> counter = new ReactiveProperty<int>(0);
+    static int counter = 0;
+    int numColls = 0;
+
+    static AudioSource source;
+    [SerializeField] AudioClip clip;
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        if (source == null)
+            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
+    }
+
+    void Start()
+    {
+        counter = 0;
+
+        if(numColls == 0)
+            numColls = GameObject.FindObjectsOfType<Collectible>().Length;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Player"))
         {
             IncrementCounter();
-            Debug.Log("Du hast " + counter + " Kiste(n) gesammelt");
+            Debug.Log("Du hast " + counter + " von " + numColls + " Kiste(n) gesammelt");
             DestroyGameObject();
-        }
-
-        if (counter.Value == 6)
-        {
-            StaticGameState.winGame();
-            SceneManager.LoadScene(0);
         }
     }
 
     public void IncrementCounter()
     {
-        counter.Value++;
+        counter++;
+        source.PlayOneShot(clip);
+
+        //if (counter >= numColls)
+        StartCoroutine(winGame());      
     }
 
 
@@ -37,14 +55,14 @@ public class Collectible : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    IEnumerator winGame()
     {
-    }
+        Debug.Log("tried to end game. waiting for " + clip.length);
+        yield return new WaitForSecondsRealtime(clip.length);
+        Debug.Log("finished waitng");
 
-    // Update is called once per frame
-    void Update()
-    {
+        StaticGameState.winGame();
+        SceneManager.LoadScene(0);
+        yield return null;
     }
 }

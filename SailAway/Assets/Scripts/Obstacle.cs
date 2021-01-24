@@ -36,8 +36,9 @@ public class Obstacle : MonoBehaviour
                 if(relativeSpeed >= hardHitSpeed)
                 {
                     source.PlayOneShot(hardHit, Mathf.Clamp(hardVolume, 0.0f, 1.0f));
-                    StaticGameState.loseGame();
-                    SceneManager.LoadScene(0);
+
+                    //End game
+                    StartCoroutine(endGame());
                 }
                 else
                 {
@@ -45,7 +46,13 @@ public class Obstacle : MonoBehaviour
                     source.PlayOneShot(lightHit, volume);
                 }
             }
-        }
-        
+        }    
+    }
+
+    IEnumerator endGame()
+    {
+        yield return new WaitForSecondsRealtime(hardHit.length);
+        StaticGameState.loseGame();
+        SceneManager.LoadScene(0);
     }
 }
