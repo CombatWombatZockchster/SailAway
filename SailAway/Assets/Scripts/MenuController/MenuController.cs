@@ -16,11 +16,16 @@ public class MenuController : MonoBehaviour
     public Camera camera;
 
     public Vector3 cameraPosHelpScreen;
+    public Vector3 cameraPosWinScreen;
+    public Quaternion _cameraRotWinScreen;
+    public Vector3 cameraPosLoseScreen;
     private Quaternion _cameraRotHelpScreen = quaternion.Euler(0f, 0f, 0f);
     private Vector3 _cameraPosStartScreen;
     private Quaternion _cameraRotStartScreen;
     public Canvas start;
     public Canvas help;
+    public Canvas win;
+    public Canvas lose;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +33,8 @@ public class MenuController : MonoBehaviour
         _cameraPosStartScreen = camera.transform.position;
         _cameraRotStartScreen = camera.transform.rotation;
         help.enabled = false;
+        win.enabled = false;
+        lose.enabled = false;
         input.help.Subscribe(a =>
         {
             if (a && !_inAnimation)
@@ -38,8 +45,21 @@ public class MenuController : MonoBehaviour
             if (a && !_inAnimation && !_inHelpScreen)
                 startGame();
         }).AddTo(this);
+        if (StaticGameState.gameState == 1)
+        {
+            start.enabled = false;
+            win.enabled = true;
+            camera.transform.position = cameraPosWinScreen;
+        } else if (StaticGameState.gameState == 2)
+        {
+            start.enabled = false;
+            lose.enabled = true;
+            camera.transform.position = cameraPosLoseScreen;
+        }
     }
-
+    
+    
+    
     private IEnumerator changeScreen()
     {
         if (_inHelpScreen)
