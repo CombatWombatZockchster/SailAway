@@ -14,6 +14,9 @@ public class WindRotator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (ship == null) ship = GameObject.FindObjectOfType<ShipController>();
+
+
         updateCollectibles();
     }
 

@@ -16,6 +16,8 @@ public class WakeIntensity : MonoBehaviour
 
     private void Start()
     {
+        if (shipObject == null) shipObject = GameObject.FindObjectOfType<ShipController>().gameObject;
+
         _shipSignals.shipSpeed.Subscribe(a =>
         {
             float b = Mathf.Clamp(a / maxSpeed, 0.0f, 1.0f);

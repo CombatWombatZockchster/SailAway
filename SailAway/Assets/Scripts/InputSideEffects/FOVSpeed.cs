@@ -22,9 +22,11 @@ public class FOVSpeed : MonoBehaviour
 
     void Awake()
     {
+        if (ship == null) ship = GameObject.FindObjectOfType<ShipController>().gameObject;
+
         shipSignals = ship.GetComponent<ShipController>();
     }
-
+    
     void Start()
     {
         cam = GetComponent<Camera>();

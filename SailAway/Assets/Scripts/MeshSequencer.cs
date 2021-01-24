@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Written by Jonas
+ * Searches for a list of meshes
+ * Then during runtime uses them like a flipbook
+*/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

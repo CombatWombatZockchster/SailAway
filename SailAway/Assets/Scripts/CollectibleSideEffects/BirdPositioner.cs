@@ -15,6 +15,11 @@ public class BirdPositioner : MonoBehaviour
     public float speed = 6f;
     public GameObject playerShip;
     
+    void Start()
+    {
+        if (playerShip == null) playerShip = GameObject.FindObjectOfType<ShipController>().gameObject;
+    }
+
     void FixedUpdate()
     {
         Vector3 target = new Vector3(playerShip.transform.position.x, 0, playerShip.transform.position.z);

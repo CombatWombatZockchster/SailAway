@@ -17,6 +17,9 @@ public class WindSound : MonoBehaviour
 
     void Awake()
     {
+        if (ship == null) ship = GameObject.FindObjectOfType<ShipController>().gameObject;
+
+
         signal = ship.GetComponent<ShipController>();
         source = GetComponent<AudioSource>();
     }

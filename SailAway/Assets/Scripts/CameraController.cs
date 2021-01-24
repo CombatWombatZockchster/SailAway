@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] float expectedMaxSpeed = 20.0f;
     void Awake()
     {
+        if (target == null) target = GameObject.FindObjectOfType<ShipController>().gameObject.transform;
+
         _shipSignals = target.GetComponent<ShipController>();
     }
 

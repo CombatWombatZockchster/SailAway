@@ -11,6 +11,8 @@ public class SailIntensity : MonoBehaviour
 
     private void Awake()
     {
+        if (shipObject == null) shipObject = GameObject.FindObjectOfType<ShipController>().gameObject;
+
         _shipSignals = shipObject.GetComponent<ShipController>();
     }
 
