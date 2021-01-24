@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 720456009608527576}
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -3.76}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 9.91129, y: 9.91129, z: 9.91129}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -659,7 +659,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -4021,7 +4021,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4074,7 +4074,7 @@ ParticleSystem:
     minVertexDistance: 0.2
     textureMode: 0
     ribbonCount: 1
-    shadowBias: 0.5
+    shadowBias: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
