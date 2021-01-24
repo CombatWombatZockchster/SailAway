@@ -88,6 +88,7 @@ public class ShipController : MonoBehaviour, IShipSignals
             (
                 input =>
                 {
+                    
                     float angle = Vector2.SignedAngle(Vector2.up, input);
                     if (Mathf.Abs(angle) <= maxSailAngle)
                         sailForward = input;
@@ -101,6 +102,9 @@ public class ShipController : MonoBehaviour, IShipSignals
 
                         sailForward = v;
                     }
+                    
+
+                    //sailForward = new Vector2(input.x, Mathf.Abs(input.y));
                 }
             )
             .AddTo(this);
@@ -110,6 +114,7 @@ public class ShipController : MonoBehaviour, IShipSignals
             (
                 input =>
                 {
+                    /*
                     if (input == Vector2.zero)
                         rudderForward = -Vector2.up;
                     else
@@ -128,6 +133,18 @@ public class ShipController : MonoBehaviour, IShipSignals
                             rudderForward = v;
                         }
                     }
+                    */
+                    float lerpV = input.x / 2.0f + 0.5f;
+                    float angle = Mathf.Lerp(-maxRudderAngle, maxRudderAngle, lerpV);
+
+                    Vector2 v = new Vector2
+                            (
+                                Mathf.Sin(Mathf.Deg2Rad * angle),
+                                -Mathf.Cos(Mathf.Deg2Rad * angle)
+                            );
+
+                    rudderForward = v;
+
                 }
             )
             .AddTo(this);
