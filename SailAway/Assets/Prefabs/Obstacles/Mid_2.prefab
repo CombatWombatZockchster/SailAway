@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8792619905099691436}
   - component: {fileID: 7418945052043074329}
   m_Layer: 0
-  m_Name: Cube.031
+  m_Name: Mid_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b6352c6b1a932418199c1a692d9e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightHit: {fileID: 8300000, guid: 604a6c24ce8fbb34c81496155a2b847f, type: 3}
+  hardHit: {fileID: 8300000, guid: debc3326e0bd61e49a0b5fbc7f5d241b, type: 3}
+  hardHitSpeed: 6
+  lightVolume: 0.7
+  hardVolume: 1
