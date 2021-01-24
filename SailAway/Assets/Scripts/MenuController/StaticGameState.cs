@@ -21,4 +21,14 @@ public static class StaticGameState
         gameState = 2;
     }
 
+    public static void helpScreen()
+    {
+        gameState = 3;
+    }
+
+    public static void startScreen()
+    {
+        gameState = 0;
+    }
+
 }
