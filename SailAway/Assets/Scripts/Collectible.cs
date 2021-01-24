@@ -43,16 +43,37 @@ public class Collectible : MonoBehaviour
     public void IncrementCounter()
     {
         counter++;
+
+        if (source == null)
+            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
+
         source.PlayOneShot(clip);
 
-        //if (counter >= numColls)
-        StartCoroutine(winGame());      
+        if (counter >= numColls)
+            StartCoroutine(winGame());      
     }
 
 
     void DestroyGameObject()
     {
-        Destroy(gameObject);
+        if (counter < numColls) Destroy(gameObject);
+        else
+        {
+            //NOTE: dont do this shit
+
+            gameObject.GetComponent<Renderer>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
+
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Renderer r = transform.GetChild(i).GetComponent<Renderer>();
+                Collider c = transform.GetChild(i).GetComponent<Collider>();
+
+                if (r != null) r.enabled = false; 
+                if (c != null) c.enabled = false; 
+            }
+        }
     }
 
     IEnumerator winGame()
@@ -63,6 +84,5 @@ public class Collectible : MonoBehaviour
 
         StaticGameState.winGame();
         SceneManager.LoadScene(0);
-        yield return null;
     }
 }

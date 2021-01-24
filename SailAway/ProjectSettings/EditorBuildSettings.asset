@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 9dcb9c72c136d3a48bd02f2757a03f0c
   - enabled: 1
+    path: Assets/Scenes/Artes Scene.unity
+    guid: 58f8d6f70223a5748bb4474a2878dde3
+  - enabled: 0
     path: Assets/Scenes/Testscene Felix.unity
     guid: 7ba4cfaa95c728a47838811a6fd6e105
   m_configObjects: {}
