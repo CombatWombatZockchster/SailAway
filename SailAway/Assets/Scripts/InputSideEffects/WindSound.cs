@@ -9,7 +9,6 @@ public class WindSound : MonoBehaviour
 {
     [SerializeField] AnimationCurve speedResponse = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
     [SerializeField] float expectedMaxSpeed = 20.0f;
-    float lv = 0;
 
     AudioSource source;
 

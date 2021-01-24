@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+//[RequireComponent(typeof(AudioSource))]
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] AudioClip lightHit;
@@ -10,12 +10,13 @@ public class Obstacle : MonoBehaviour
     [SerializeField] float hardHitSpeed = 5.0f;
     [SerializeField] float lightVolume = 3.0f;
     [SerializeField] float hardVolume = 1.0f;
-    AudioSource source;
+    static AudioSource source;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        source = GetComponent<AudioSource>();
+        if (source == null)
+            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
     }
 
     void OnCollisionEnter(Collision collision)

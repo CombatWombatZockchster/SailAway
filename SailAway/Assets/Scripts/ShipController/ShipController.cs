@@ -228,20 +228,22 @@ public class ShipController : MonoBehaviour, IShipSignals
 
     void OnDrawGizmos()
     {
+        Vector3 start = transform.position + transform.up * 2;
+
         //Wind direction
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + vector3FromVector2(windDir) * windStrength);
+        Gizmos.DrawLine(start, start + vector3FromVector2(windDir) * windStrength);
 
         //Forward direction
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3.0f);
+        Gizmos.DrawLine(start, start + transform.forward * 4.0f);
 
         //Sail direction
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + Vector3.up*2, transform.position + Vector3.up*2 + vector3FromVector2(worldSailForward) * 3.0f);
+        Gizmos.DrawLine(start + transform.up, start + transform.up + vector3FromVector2(worldSailForward) * 3.0f);
 
         //Rudder direction
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position - transform.forward * 2.0f, transform.position + vector3FromVector2(worldRudderForward) - transform.forward*2.0f);
+        Gizmos.DrawLine(start - transform.forward * 2.5f, start - transform.forward * 2.5f + vector3FromVector2(worldRudderForward));
     }
 }
