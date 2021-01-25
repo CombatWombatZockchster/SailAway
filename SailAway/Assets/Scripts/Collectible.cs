@@ -18,8 +18,7 @@ public class Collectible : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (source == null)
-            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
+        checkSource();
     }
 
     void Start()
@@ -37,17 +36,15 @@ public class Collectible : MonoBehaviour
             IncrementCounter();
             Debug.Log("Du hast " + counter + " von " + numColls + " Kiste(n) gesammelt");
             DestroyGameObject();
+
+            checkSource();
+            source.PlayOneShot(clip);
         }
     }
 
     public void IncrementCounter()
     {
         counter++;
-
-        if (source == null)
-            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
-
-        source.PlayOneShot(clip);
 
         if (counter >= numColls)
             StartCoroutine(winGame());      
@@ -67,11 +64,14 @@ public class Collectible : MonoBehaviour
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                Renderer r = transform.GetChild(i).GetComponent<Renderer>();
-                Collider c = transform.GetChild(i).GetComponent<Collider>();
+                GameObject child = transform.GetChild(i).gameObject;
+                Renderer r = child.GetComponent<Renderer>();
+                Collider c = child.GetComponent<Collider>();
+                Light l = child.GetComponent<Light>();
 
                 if (r != null) r.enabled = false; 
                 if (c != null) c.enabled = false; 
+                if (l != null) l.enabled = false; 
             }
         }
     }
@@ -84,5 +84,15 @@ public class Collectible : MonoBehaviour
 
         StaticGameState.winGame();
         SceneManager.LoadScene(0);
+    }
+
+    void checkSource()
+    {
+        if (source == null)
+        { 
+            source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
+            source.volume = 0.7f;
+            source.spatialBlend = 0.3f;
+        }
     }
 }
