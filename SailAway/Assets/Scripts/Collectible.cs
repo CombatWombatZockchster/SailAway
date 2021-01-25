@@ -91,8 +91,8 @@ public class Collectible : MonoBehaviour
         if (source == null)
         { 
             source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
-            source.volume = 0.7f;
-            source.spatialBlend = 0.3f;
+            source.volume = 1.0f;
+            source.spatialBlend = 0.0f;
         }
     }
 }
