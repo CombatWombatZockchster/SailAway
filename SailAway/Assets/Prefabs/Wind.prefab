@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 720456009608527579}
   - component: {fileID: 720456009608527578}
   - component: {fileID: 720456009608527577}
+  - component: {fileID: -6142912640612859493}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Untagged
@@ -4895,3 +4896,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-6142912640612859493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720456009608527576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd60041d7f58b24eba85ddbcce40d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipObject: {fileID: 0}
+  invertedVector: 1
