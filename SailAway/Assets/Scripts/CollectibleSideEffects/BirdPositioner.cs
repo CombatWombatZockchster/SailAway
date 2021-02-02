@@ -26,6 +26,7 @@ public class BirdPositioner : MonoBehaviour
         Vector3 central = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
         _targetRadius = Vector3.Distance(target, central)/10f;
         _radius = Mathf.Lerp(_radius, Mathf.Clamp(_targetRadius, minRadius, maxRadius), 0.5f);
+        var size = ((_radius - minRadius) / (maxRadius - minRadius)) * 8 + 2;
         for (int i = 0; i < birds.Length; i++)
         {
             float angleSpeed = speed / _radius;
@@ -35,6 +36,7 @@ public class BirdPositioner : MonoBehaviour
             birds[i].transform.localPosition = new Vector3( Mathf.Cos(Mathf.Deg2Rad * angle) * -_radius, 2f,
                 Mathf.Sin(Mathf.Deg2Rad * angle) * _radius);
             birds[i].transform.localRotation = Quaternion.Euler(0f, angle, 0f);
+            birds[i].transform.localScale = new Vector3(size, size, size);
         }
     }
 }
