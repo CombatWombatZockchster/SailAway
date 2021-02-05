@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using UnityEditor.U2D;
 
 [RequireComponent(typeof(AudioSource))]
 public class WindSound : MonoBehaviour
