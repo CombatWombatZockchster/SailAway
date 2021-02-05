@@ -301,21 +301,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8146546510224257557}
     m_Modifications:
+    - target: {fileID: 8722251093154824834, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722251093154824835, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8722251093154824835, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 116.27536
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8722251093154824835, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.79191
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8722251093154824835, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 261.7598
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8722251093154824835, guid: 348a29385bb3e1b4abbd4c7867eabc60, type: 3}
       propertyPath: m_LocalRotation.w

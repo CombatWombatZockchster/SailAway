@@ -20,7 +20,16 @@ public class WindRotation : MonoBehaviour
 
     private void Awake()
     {
-        if (shipObject == null) shipObject = GameObject.FindObjectOfType<ShipController>().gameObject;
+        if (shipObject == null)
+        {
+            ShipController t = GameObject.FindObjectOfType<ShipController>();
+            if (t != null) shipObject = t.gameObject;
+            else
+            {
+                this.enabled = false;
+                return;
+            }
+        }
 
         _shipSignals = shipObject.GetComponent<ShipController>();
         _flag = gameObject;

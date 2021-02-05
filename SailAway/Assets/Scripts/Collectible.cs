@@ -15,14 +15,11 @@ public class Collectible : MonoBehaviour
     static AudioSource source;
     [SerializeField] AudioClip clip;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        checkSource();
-    }
 
     void Start()
     {
+        checkSource();
+
         counter = 0;
 
         if(numColls == 0)
@@ -78,9 +75,9 @@ public class Collectible : MonoBehaviour
 
     IEnumerator winGame()
     {
-        Debug.Log("tried to end game. waiting for " + clip.length);
+        //Debug.Log("tried to end game. waiting for " + clip.length);
         yield return new WaitForSecondsRealtime(clip.length);
-        Debug.Log("finished waitng");
+        //Debug.Log("finished waitng");
 
         StaticGameState.winGame();
         SceneManager.LoadScene(0);
@@ -88,11 +85,14 @@ public class Collectible : MonoBehaviour
 
     void checkSource()
     {
-        if (source == null)
+        if (source == null || !source.enabled)
         { 
             source = gameObject.AddComponent<AudioSource>();//singleton to reduce number of sound sources in scene
+
             source.volume = 1.0f;
             source.spatialBlend = 0.0f;
         }
+
+        Debug.Log(source);
     }
 }
